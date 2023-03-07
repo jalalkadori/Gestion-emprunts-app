@@ -9,37 +9,46 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   </head>
   <body>
-   
-    <nav class="navbar">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">
-                <img src="./logo/LGM.png" width="150">
-            </span>
-           
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="./logo/LGM.png" alt="Logo" style="width:120px;"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="#" role="button">Support ?</a>
+                </li>
+            </ul>
+            </div>
         </div>
     </nav>
 
+
     <div class="container-fluid ">
-        <div class="container">
-            <div class="row mt-5">
-                <form action="#" method="post">
-                    
-                    <div class="my-3 text-center">
-                        <img src="./logo/user.png" class="circle p-5 rounded-circle" alt="" srcset="">
-                    </div>
-                    <div class="my-3 text-center">
-                        <h3>Admin</h3>
-                    </div>
-                    <div class="my-3">
-                        <input type="email" class="w-100 input-blue" placeholder="name@example.com">
-                    </div>
-                    <div class="my-3">
-                        <input type="password" class="w-100 input-blue" placeholder="Entrer votre mot de pass ...">
-                    </div>
-                    <div class="my-3">
-                        <button Class="w-100 blue">Connecter</button>
-                    </div>
-                </form>
+        <div class="container mt-5">
+            <div class="row mt-5 w-100 d-flex justify-content-center">
+                <div class="col-6 mt-5">
+                    <form action="#" method="post">
+                        <div class="my-3 text-center">
+                            <img src="./logo/user.png" class="circle p-2 rounded-circle" style="width=100px">
+                        </div>
+                        <div class="my-3 text-center">
+                            <h3>Admin</h3>
+                        </div>
+                        <div class="my-3">
+                            <input type="email" class="w-100 input-blue" placeholder="name@example.com">
+                        </div>
+                        <div class="my-3">
+                            <input type="password" class="w-100 input-blue" placeholder="Entrer votre mot de pass ...">
+                        </div>
+                        <div class="my-3">
+                            <button Class="w-100 blue">Connecter</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

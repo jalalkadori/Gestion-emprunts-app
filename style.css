@@ -10,6 +10,12 @@
     border-radius: 25px;
     padding: 10px 0;
 }
+.bg-blue{
+    background-color: #2F58CD;
+}
+.color-blue{
+    background-color: #2F58CD;
+}
 .input-blue {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
@@ -18,6 +24,16 @@
     padding: 10px 15px;
     background-color: transparent;
 }
+.white-btn {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+}
 .circle {
     border: 5px solid #2F58CD;
+}
+.side-nav {
+    height: 350px;
+    background: blue;
 }
