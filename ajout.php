@@ -60,29 +60,7 @@ if(!isset($_SESSION['email'])) {
               <a class="btn text-light fs-5 font-weight-bold" name="list">List des ouvrages</a>
             </div>
           </div>
-            <?php 
-                if(isset($_POST['ajoter'])) {
-                    $titre = $_POST['titre'];
-                    $auteur = $_POST['auteur'];
-                    $image = $_POST['image'];
-                    $etat_ouvrage = $_POST['etat_ouvrage'];
-                    $type_ouvrage = $_POST['type_ouvrage'];
-                    $date_edition = $_POST['date_edition'];
-                    $date_achat = $_POST['date_achat'];
-                    $nombre_pages = $_POST['nombre_pages'];
-
-
-
-                    $book_insert_request = "INSERT INTO `ouvrage` VALUES (NULL, '$titre', '$auteur', '$image', '$etat_ouvrage', '$type_ouvrage', '$date_edition', '$date_achat', '$nombre_pages')";
-                    $book_insert = $db_connection->prepare($book_insert_request);
-                    $book_insert->execute();
-
-                }
-
-
-
-            ?>
-
+          
 
           <div class="col-9">
             <div class="container text-uppercase">
@@ -97,13 +75,13 @@ if(!isset($_SESSION['email'])) {
                         </div>
                         <div class="my-3">
                             <label class="form-label mx-3">Image de couverture : </label>
-                            <input type="file" class="w-100 input-blue" name="image">
+                            <input type="file" class="w-100 input-blue" name="file">
                         </div>
                         <div class="my-3 d-flex justify-content-between gap-3">
                             <select class="w-50 input-blue" name="etat_ouvrage">
                                 <option>Choisir l’état de l’ouvrage</option>
                                 <option value="Neuf">Neuf</option>
-                                <option value="Bon état">Bon état"</option>
+                                <option value="Bon état">Bon état</option>
                                 <option value="Acceptable">Acceptable</option>
                                 <option value="Assez usé">Assez usé </option>
                                 <option value="Déchiré">Déchiré</option>
@@ -127,7 +105,7 @@ if(!isset($_SESSION['email'])) {
                                 <input type="date" class="w-100 input-blue" name="date_achat">
                             </div>
                             <div>
-                                <label class="form-label mx-3">le nombre de pages : : </label>
+                                <label class="form-label mx-3">le nombre de pages : </label>
                                 <input type="number" class="w-100 input-blue" name="nombre_pages">
                             </div>
                             
@@ -142,6 +120,34 @@ if(!isset($_SESSION['email'])) {
         </div>
       </div>
     
+            <?php 
+                if(isset($_POST['ajoter'])) {
+                    $titre = $_POST['titre'];
+                    $auteur = $_POST['auteur'];
+                    $etat_ouvrage = $_POST['etat_ouvrage'];
+                    $type_ouvrage = $_POST['type_ouvrage'];
+                    $date_edition = $_POST['date_edition'];
+                    $date_achat = $_POST['date_achat'];
+                    $nombre_pages = $_POST['nombre_pages'];
+                    
+                    if(isset($_FILES['file'])) {
+                      $image_name = $_FILES['file']['name'];
+                      $tmp_name = $_FILES['file']['tmp_name'];
+                      $destination = 'images/';
+                      move_uploaded_file($tmp_name,$destination.$image_name);
+                    }
+             
+
+
+                    // $book_insert_request = "INSERT INTO `ouvrage` VALUES (NULL, '$titre', '$auteur', '$image_link', '$etat_ouvrage', '$type_ouvrage', '$date_edition', '$date_achat', '$nombre_pages')";
+                    // $book_insert = $db_connection->prepare($book_insert_request);
+                    // $book_insert->execute();
+
+                }
+
+
+
+            ?>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
