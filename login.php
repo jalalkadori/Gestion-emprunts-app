@@ -1,3 +1,7 @@
+<?php include("./dbConnection.php");
+
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,7 +29,35 @@
             </div>
         </div>
     </nav>
+    <?php 
+        $error_email = '';
+        if(isset($_POST['connecter'])) {
 
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+    
+            $admin_connection_request = "SELECT * FROM `bibliothecaire` WHERE EMAIL_BIBLIOTHECAIRE = '$email' AND MDP_BIBLIOTHECAIRE = '$password'";
+            $admin_connection = $db_connection->prepare($admin_connection_request);
+            $admin_connection->execute();
+            $admin_connection_results = $admin_connection->fetch( PDO::FETCH_ASSOC );
+            $count = $admin_connection->rowCount();
+            if($count == 0) {
+                $error_email = 'Email or password wrong';
+            } else {
+                echo $admin_connection_results['EMAIL_BIBLIOTHECAIRE'];
+                echo $admin_connection_results['MDP_BIBLIOTHECAIRE'];
+
+                session_start();
+                $_SESSION['email'] = $admin_connection_results['EMAIL_BIBLIOTHECAIRE'];
+                $_SESSION['password'] = $admin_connection_results['MDP_BIBLIOTHECAIRE'];
+                $_SESSION['id'] = $admin_connection_results['ID_BIBLIOTHECAIRE'];
+                $_SESSION['full_name'] = $admin_connection_results['NOM_BIBLIOTHECAIRE'];
+                header('Location: index.php');
+            }
+        }
+    
+    
+    ?>
 
     <div class="container-fluid ">
         <div class="container mt-5">
@@ -39,13 +71,14 @@
                             <h3>Admin</h3>
                         </div>
                         <div class="my-3">
-                            <input type="email" class="w-100 input-blue" placeholder="name@example.com">
+                            <input type="email" class="w-100 input-blue" name="email" placeholder="name@example.com">
                         </div>
                         <div class="my-3">
-                            <input type="password" class="w-100 input-blue" placeholder="Entrer votre mot de pass ...">
+                            <input type="password" class="w-100 input-blue" name="password" placeholder="Entrer votre mot de pass ...">
                         </div>
+                            <span class="text-danger"><?= $error_email?></span>
                         <div class="my-3">
-                            <button Class="w-100 blue">Connecter</button>
+                            <button Class="w-100 blue" name="connecter">Connecter</button>
                         </div>
                     </form>
                 </div>

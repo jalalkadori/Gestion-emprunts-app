@@ -1,0 +1,122 @@
+CREATE DATABASE gestion_emprunts;
+USE gestion_emprunt;
+
+/*==============================================================*/
+/* Table: BIBLIOTHECAIRE */
+/*==============================================================*/
+create table BIBLIOTHECAIRE
+(
+ID_BIBLIOTHECAIRE int not null AUTO_INCREMENT,
+NOM_BIBLIOTHECAIRE varchar(50),
+EMAIL_BIBLIOTHECAIRE varchar(120),
+MDP_BIBLIOTHECAIRE varchar(255),
+primary key (ID_BIBLIOTHECAIRE)
+);
+
+/*==============================================================*/
+/* Table: ADHERENT */
+/*==============================================================*/
+create table ADHERENT
+(
+ID_ADHERENT int not null AUTO_INCREMENT,
+NOM_ADHERENT varchar(25),
+PRENOM_ADHERENT varchar(25),
+CIN_ADHERENT varchar(8),
+ADRESSE_ADHERENT varchar(255),
+DN_ADHERENT date,
+TELE_ADHERENT int(10),
+EMAIL_ADHERENT varchar(120),
+MDP_ADHERENT varchar(255),
+TYPE_ADHERENT varchar(25),
+DATE_CREATION_COMPTE timestamp,
+PENALITE int(3),
+primary key (ID_ADHERENT)
+);
+
+/*==============================================================*/
+/* Table: EMPRUNT */
+/*==============================================================*/
+create table EMPRUNT
+(
+ID_EMPRUNT int not null AUTO_INCREMENT,
+ID_BIBLIOTHECAIRE int not null,
+ID_ADHERENT int not null,
+ID_RESERVATION int not null,
+DATE_EMPRUNT date,
+DATE_RETOUR date,
+DATE_EFF_RETOUT date,
+primary key (ID_EMPRUNT),
+
+key AK_PK_ID_EMPRUNT (ID_EMPRUNT)
+);
+
+
+
+/*==============================================================*/
+/* Table: OPERATION */
+/*==============================================================*/
+create table OPERATION
+(
+ID_OPERATION int not null AUTO_INCREMENT,
+CODE_OUVRAGE int not null,
+ID_BIBLIOTHECAIRE int not null,
+DATE_OPERATION date,
+NOM_OPERATION varchar(60),
+primary key (ID_OPERATION)
+);
+
+/*==============================================================*/
+/* Table: OUVRAGE */
+/*==============================================================*/
+create table OUVRAGE
+(
+CODE_OUVRAGE int not null AUTO_INCREMENT,
+TITRE_OUVRAGE varchar(120),
+NOM_AUTHEUR varchar(60),
+IMG_OUVRAGE varchar(50),
+ETAT_OUVRAGE varchar(25),
+TYPE_OUVRAGE varchar(25),
+DATE_EDITION date,
+DATE_ACHAT date,
+NOMBRE_PAGE int,
+primary key (CODE_OUVRAGE)
+);
+
+/*==============================================================*/
+/* Table: RESERVATION */
+/*==============================================================*/
+create table RESERVATION
+(
+ID_RESERVATION int not null AUTO_INCREMENT,
+ID_ADHERENT int not null,
+CODE_OUVRAGE int not null,
+DATE_RESERVATION date,
+primary key (ID_RESERVATION)
+);
+
+
+alter table EMPRUNT add foreign key (ID_RESERVATION)
+references RESERVATION (ID_RESERVATION);
+
+alter table EMPRUNT add foreign key (ID_ADHERENT)
+references ADHERENT (ID_ADHERENT);
+
+alter table EMPRUNT add foreign key (ID_BIBLIOTHECAIRE)
+references BIBLIOTHECAIRE (ID_BIBLIOTHECAIRE);
+
+
+
+alter table OPERATION add foreign key (ID_BIBLIOTHECAIRE)
+references BIBLIOTHECAIRE (ID_BIBLIOTHECAIRE) on delete restrict on update
+restrict;
+
+alter table OPERATION add foreign key (CODE_OUVRAGE)
+references OUVRAGE (CODE_OUVRAGE);
+
+
+
+alter table RESERVATION add foreign key (ID_ADHERENT)
+references ADHERENT (ID_ADHERENT);
+
+alter table RESERVATION add foreign key (CODE_OUVRAGE)
+references OUVRAGE (CODE_OUVRAGE);
