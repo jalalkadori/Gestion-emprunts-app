@@ -21,7 +21,7 @@ if(!isset($_SESSION['email'])) {
   <body>
    
     <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
+        <div class="container-fluid px-5">
             <a class="navbar-brand" href="#"><img src="./logo/LGM.png" alt="Logo" style="width:120px;"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -47,27 +47,89 @@ if(!isset($_SESSION['email'])) {
         <div class="row min-vh-100 d-flex justify-content-between">
 
           <div class="col-2 d-flex flex-column align-items-center shadow-sm" style="background-color: #2F58CD; border-radius: 0 25px 0 0">
-            <a class="btn bg-white my-4 rounded-pill w-100 font-weight-bold">Gestionnaire de taches</a>
-            <div class="d-flex flex-row justify-content-start align-items-center mb-4">
-              <i class="fa-solid fa-circle-plus fs-3 text-light"></i>
-              <a class="btn text-light fs-5 font-weight-bold" href="./ajout.php" name="ajouter">Ajouter un ouvrage</a>
-            </div>
-            <div class="d-flex flex-row justify-content-start align-items-center mb-4">
-              <i class="fa-solid fa-check fs-3 text-light"></i>
-              <a class="btn text-light fs-5 font-weight-bold" name="validation">Enregistrement des emprunts</a>
-            </div>
-            <div class="d-flex flex-row justify-content-start align-items-center mb-4">
-              <i class="fa-solid fa-bars-staggered fs-3 text-light"></i>
-              <a class="btn text-light fs-5 font-weight-bold" href="list.php">List des ouvrages</a>
-            </div>
+            <a class="btn bg-white my-3 rounded-pill w-100 font-weight-bold" href="index.php">Page d'accueil</a>
+            <a class="btn bg-white mb-3 rounded-pill w-100 font-weight-bold">Mon Profil</a>
           </div>
+            <?php
+                $list_ouvrage_request = "SELECT * FROM `ouvrage` WHERE ouvrage.RESERVATION = 'non'";
+         
+                if(isset($_POST['chercher'])) {
+                  $titre = $_POST["titre"];
+                  $auteur = $_POST["auteur"];
+                  $type_ouvrage = $_POST["type_ouvrage"];
 
+                  if(!empty($titre)) {
+                      $list_ouvrage_request.=" AND ouvrage.TITRE_OUVRAGE LIKE '$titre'";
+                  } 
+                  if(!empty($auteur)) {
+                      $list_ouvrage_request.=" AND ouvrage.NOM_AUTHEUR = '$auteur'";
+                  }
+                  if(!empty($type_ouvrage)) {
+                      $list_ouvrage_request.=" AND ouvrage.TYPE_OUVRAGE = '$type_ouvrage'";
+                  }
+               
+                } 
+
+            ?>
 
 
           <div class="col-9">
-            <div class="container text-center text-uppercase">
-              <h1 class="text-center mb-5 text-uppercase" style="color: #2F58CD">aperçu</h1>
-           
+            <section class="container pt-5">
+                  <h3 class="pt-5">Filtrer la liste des ouvrage !</h2>
+                  <form class="row row-cols-1 row-cols-lg-4"  action="" method="POST">
+                      <div class="col">
+                          <h5 for="type">Titre de l’ouvrage</h5>
+                          <input type="text" class="w-100 input-blue" name="titre"  > 
+                      </div>
+                      <div class="col">
+                          <h5 for="type">Nom d’auteur</h5>
+                          <input type="text" class="w-100 input-blue" name="auteur">
+                      </div>
+                      <div class="col"> 
+                          <h5 for="type">Type de l’ouvrage</h5>
+                          <select class="w-100 input-blue" name="type_ouvrage">
+                                <option></option>
+                                <option value="livre">livre</option>
+                                <option value="roman">roman</option>
+                                <option value="DVD">DVD</option>
+                                <option value="mémoire de recherche">mémoire de recherche</option>
+                          </select>
+                      </div>
+                      
+                      <div class="col d-flex align-items-end mt-2">
+                          <h5 for="type"></h5>
+                          <button Class="w-100 blue" name="chercher">Chercher</button>
+                      </div>
+                  </form>
+              </section>
+
+            <div class="container my-5 text-center text-uppercase">
+              <h3 class="text-center mb-5 text-uppercase" style="color: #2F58CD">list des ouvrages</h1>
+              <div class="row row-cols-4">
+                <?php
+
+                $list_ouvrage = $db_connection->prepare($list_ouvrage_request);
+                $list_ouvrage->execute();
+
+                while($row = $list_ouvrage->fetch(PDO::FETCH_ASSOC)) {
+                    echo "
+                        <div class='col'>
+                            <div class='card position-relative' style='width: 15rem; height:400px;'>
+                                <img src='".$row['IMG_OUVRAGE']."' class='card-img-top img-thumbnail' style='height:200px;'>
+                                <div class='card-body d-flex flex-column justify-content-end'>
+                                    <h5 class='card-title'>".$row['TITRE_OUVRAGE']."</h5>
+                                    <p class='card-text'>Par : ".$row['NOM_AUTHEUR']."</p>                               
+                                    <a href='#' class='btn btn-dark w-100 text-uppercase'>réserver</a>
+                                </div>
+                                <span class='position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle'>
+                                    <span class='visually-hidden'>New alerts</span>
+                                </span>
+                            </div>
+                        </div>
+                    ";
+                }
+                ?>
+              </div>
             </div>
           </div>
         </div>

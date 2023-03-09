@@ -71,6 +71,34 @@ if(!isset($_SESSION['email'])) {
 
 
           <div class="col-9">
+                <section class="container pt-5">  
+                  <form class="row row-cols-1 row-cols-lg-4"  action="" method="POST">
+                      <div class="col">
+                          <h5 for="type">titre de l’ouvrage</h5>
+                          <input type="text" class="w-100 input-blue" name="titre">
+                      </div>
+                      <div class="col">
+                          <h5 for="type">Nom d’auteur</h5>
+                          <input type="text" class="w-100 input-blue" name="auteur">
+                      </div>
+                      <div class="col">
+                          <h5 for="type">Type de l’ouvrage</h5>
+                          <select class="w-100 input-blue" name="type_ouvrage">
+                                <option></option>
+                                <option value="livre">livre</option>
+                                <option value="roman">roman</option>
+                                <option value="DVD">DVD</option>
+                                <option value="mémoire de recherche">mémoire de recherche</option>
+                          </select>
+                      </div>
+                      
+                      <div class="col d-flex align-items-end mt-2">
+                          <h5 for="type"></h5>
+                          <button Class="w-100 blue" name="chercher">Chercher</button>
+                      </div>
+                  </form>
+                </section>
+
             <div class="container text-center text-uppercase">
               <h1 class="text-center mb-5 text-uppercase" style="color: #2F58CD">list des ouvrages</h1>
               <div class="row row-cols-4">
@@ -80,11 +108,13 @@ if(!isset($_SESSION['email'])) {
                         <div class='col'>
                             <div class='card position-relative' style='width: 15rem; height:400px;'>
                                 <img src='".$row['IMG_OUVRAGE']."' class='card-img-top img-thumbnail' style='height:200px;'>
-                                <div class='card-body'>
+                                <div class='card-body d-flex flex-column justify-content-end'>
                                     <h5 class='card-title'>".$row['TITRE_OUVRAGE']."</h5>
                                     <p class='card-text'>Par : ".$row['NOM_AUTHEUR']."</p>
-                                    <a href='#' class='btn btn-success'>Modifer</a>
-                                    <a href='#' class='btn btn-danger'>Supprimer</a>
+                                    <div class='row gap-1'>
+                                      <a href='#' class='col btn btn-success'>Modifer</a>
+                                      <a href='#' class='col btn btn-danger'>Supprimer</a>
+                                    </div>
                                 </div>
                                 <span class='position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle'>
                                     <span class='visually-hidden'>New alerts</span>

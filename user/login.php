@@ -40,7 +40,7 @@
             $adherent_connection = $db_connection->prepare($adherent_connection_request);
             $adherent_connection->execute();
             $adherent_connection_results = $adherent_connection->fetch( PDO::FETCH_ASSOC );
-            $count = $admin_connection->rowCount();
+            $count = $adherent_connection->rowCount();
             if($count == 0) {
                 $error_email = 'Adresse email ou mot de pass incorect';
             } else {
@@ -48,10 +48,10 @@
                 echo $admin_connection_results['MDP_BIBLIOTHECAIRE'];
 
                 session_start();
-                $_SESSION['email'] = $admin_connection_results['EMAIL_BIBLIOTHECAIRE'];
-                $_SESSION['password'] = $admin_connection_results['MDP_BIBLIOTHECAIRE'];
-                $_SESSION['id'] = $admin_connection_results['ID_BIBLIOTHECAIRE'];
-                $_SESSION['full_name'] = $admin_connection_results['NOM_BIBLIOTHECAIRE'];
+                $_SESSION['email'] = $adherent_connection_results['EMAIL_ADHERENT'];
+                $_SESSION['password'] = $adherent_connection_results['MDP_BIBLIOTHECAIRE'];
+                $_SESSION['id'] = $adherent_connection_results['ID_ADHERENT'];
+                $_SESSION['full_name'] = $adherent_connection_results['NOM_ADHERENT'] . ' ' . $adherent_connection_results['PRENOM_ADHERENT'];
                 header('Location: index.php');
             }
         }
@@ -65,7 +65,7 @@
                 <div class="col-6 mt-5">
                     <form action="#" method="post">
                         <div class="my-3 text-center">
-                            <img src="./logo/user.png" class="circle p-2 rounded-circle" style="width=100px">
+                            <img src="./logo/user.png" class="circle p-2 rounded-circle" style="width:100px">
                         </div>
                         <div class="my-3 text-center">
                             <h3>Se connecter à votre compte</h3>

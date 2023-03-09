@@ -72,11 +72,11 @@ if(!isset($_SESSION['email'])) {
                                         
                     $image_name = $_FILES['image']['name'];
                     $tmp_name = $_FILES['image']['tmp_name'];
-                    $destination = './images/';
+                    $destination = '../images/';
                     $target = $destination . $_FILES['image']['name'];
                     
                     move_uploaded_file($tmp_name, $target);
-                    $book_insert_request = "INSERT INTO `ouvrage` VALUES (NULL, '$titre', '$auteur', '$target', '$etat_ouvrage', '$type_ouvrage', '$date_edition', '$date_achat', '$nombre_pages')";
+                    $book_insert_request = "INSERT INTO `ouvrage` VALUES (NULL, '$titre', '$auteur', '$target', '$etat_ouvrage', '$type_ouvrage', '$date_edition', '$date_achat', '$nombre_pages', 'non')";
                     $book_insert = $db_connection->prepare($book_insert_request);
                     $book_insert->execute();
 
