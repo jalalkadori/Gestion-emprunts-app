@@ -58,7 +58,7 @@ if(!isset($_SESSION['email'])) {
             </div>
             <div class="d-flex flex-row justify-content-start align-items-center mb-4">
               <i class="fa-solid fa-bars-staggered fs-3 text-light"></i>
-              <a class="btn text-light fs-5 font-weight-bold" name="list">List des ouvrages</a>
+              <a class="btn text-light fs-5 font-weight-bold" href="list.php">List des ouvrages</a>
             </div>
           </div>
 
@@ -67,52 +67,7 @@ if(!isset($_SESSION['email'])) {
           <div class="col-9">
             <div class="container text-center text-uppercase">
               <h1 class="text-center mb-5 text-uppercase" style="color: #2F58CD">aperçu</h1>
-              <div class="row row-cols-2">
-                <div class="col mb-5 d-flex justify-content-center">
-                  <div class="card shadow" style="background-color: #2F58CD; width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title text-light text-uppercase">Total <br> des emprunts</h5>
-                      <div class="d-flex flex-row justify-content-center align-items-center my-4">
-                        <h2 class="text-light">255</h2>
-                        <i class="fa-sharp fa-solid fa-arrow-up fs-3 text-light mx-3"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col mb-5 d-flex justify-content-center">
-                  <div class="card shadow" style="background-color: #2F58CD; width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title text-light">Nombre <br> d’ouvrages</h5>
-                      <div class="d-flex flex-row justify-content-center align-items-center my-4">
-                        <h2 class="text-light">255</h2>
-                        <i class="fa-sharp fa-solid fa-arrow-up fs-3 text-light mx-3"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col mb-5 d-flex justify-content-center">
-                  <div class="card shadow" style="background-color: #2F58CD; width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title text-light">Total des reservations validées</h5>
-                      <div class="d-flex flex-row justify-content-center align-items-center my-4">
-                        <h2 class="text-light">255</h2>
-                        <i class="fa-sharp fa-solid fa-arrow-up fs-3 text-light mx-3"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col mb-5 d-flex justify-content-center">
-                  <div class="card shadow" style="background-color: #2F58CD; width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title text-light">Nombre <br> d’adhérents</h5>
-                      <div class="d-flex flex-row justify-content-center align-items-center my-4">
-                        <h2 class="text-light">255</h2>
-                        <i class="fa-sharp fa-solid fa-arrow-up fs-3 text-light mx-3"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+           
             </div>
           </div>
         </div>

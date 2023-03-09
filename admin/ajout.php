@@ -60,13 +60,38 @@ if(!isset($_SESSION['email'])) {
               <a class="btn text-light fs-5 font-weight-bold" name="list">List des ouvrages</a>
             </div>
           </div>
-          
+          <?php 
+                if(isset($_POST['ajoter'])) {
+                    $titre = $_POST['titre'];
+                    $auteur = $_POST['auteur'];
+                    $etat_ouvrage = $_POST['etat_ouvrage'];
+                    $type_ouvrage = $_POST['type_ouvrage'];
+                    $date_edition = $_POST['date_edition'];
+                    $date_achat = $_POST['date_achat'];
+                    $nombre_pages = $_POST['nombre_pages'];
+                                        
+                    $image_name = $_FILES['image']['name'];
+                    $tmp_name = $_FILES['image']['tmp_name'];
+                    $destination = './images/';
+                    $target = $destination . $_FILES['image']['name'];
+                    
+                    move_uploaded_file($tmp_name, $target);
+                    $book_insert_request = "INSERT INTO `ouvrage` VALUES (NULL, '$titre', '$auteur', '$target', '$etat_ouvrage', '$type_ouvrage', '$date_edition', '$date_achat', '$nombre_pages')";
+                    $book_insert = $db_connection->prepare($book_insert_request);
+                    $book_insert->execute();
+
+                    header('Location: list.php');
+                }
+
+
+
+            ?>
 
           <div class="col-9">
             <div class="container text-uppercase">
               <h2 class="text-center mb-5 text-uppercase" style="color: #2F58CD">Ajouter un ouvrage</h2>
               <div class="row">
-                <form action="" method="post">
+                <form action="ajout.php" method="post" enctype="multipart/form-data">
                         <div class="my-3">
                             <input type="text" class="w-100 input-blue" name="titre" placeholder="le titre de l’ouvrage ...">
                         </div>
@@ -75,7 +100,7 @@ if(!isset($_SESSION['email'])) {
                         </div>
                         <div class="my-3">
                             <label class="form-label mx-3">Image de couverture : </label>
-                            <input type="file" class="w-100 input-blue" name="file">
+                            <input type="file" class="w-100 input-blue" name="image">
                         </div>
                         <div class="my-3 d-flex justify-content-between gap-3">
                             <select class="w-50 input-blue" name="etat_ouvrage">
@@ -111,7 +136,7 @@ if(!isset($_SESSION['email'])) {
                             
                         </div>
                         <div class="my-3">
-                            <button Class="w-100 blue" name="ajoter">Ajouter</button>
+                            <button Class="w-100 blue" name="ajoter" id>Ajouter</button>
                         </div>
                 </form>
               </div>
@@ -120,34 +145,7 @@ if(!isset($_SESSION['email'])) {
         </div>
       </div>
     
-            <?php 
-                if(isset($_POST['ajoter'])) {
-                    $titre = $_POST['titre'];
-                    $auteur = $_POST['auteur'];
-                    $etat_ouvrage = $_POST['etat_ouvrage'];
-                    $type_ouvrage = $_POST['type_ouvrage'];
-                    $date_edition = $_POST['date_edition'];
-                    $date_achat = $_POST['date_achat'];
-                    $nombre_pages = $_POST['nombre_pages'];
-                    
-                    if(isset($_FILES['file'])) {
-                      $image_name = $_FILES['file']['name'];
-                      $tmp_name = $_FILES['file']['tmp_name'];
-                      $destination = 'images/';
-                      move_uploaded_file($tmp_name,$destination.$image_name);
-                    }
-             
-
-
-                    // $book_insert_request = "INSERT INTO `ouvrage` VALUES (NULL, '$titre', '$auteur', '$image_link', '$etat_ouvrage', '$type_ouvrage', '$date_edition', '$date_achat', '$nombre_pages')";
-                    // $book_insert = $db_connection->prepare($book_insert_request);
-                    // $book_insert->execute();
-
-                }
-
-
-
-            ?>
+           
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

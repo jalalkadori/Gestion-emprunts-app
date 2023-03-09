@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap');
+
+.blue {
+    background-color: #2F58CD;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    padding: 10px 0;
+}
+.bg-blue{
+    background-color: #2F58CD;
+}
+.input-blue {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    border: 3px solid #2F58CD;
+    border-radius: 25px;
+    padding: 10px 15px;
+    background-color: transparent;
+}
+select.white-btn {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+}
+.circle {
+    border: 5px solid #2F58CD;
+}
+.side-nav {
+    height: 350px;
+    background: blue;
+}
