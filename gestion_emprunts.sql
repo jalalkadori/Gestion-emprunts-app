@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 09 mars 2023 à 13:21
+-- Généré le : ven. 10 mars 2023 à 00:54
 -- Version du serveur : 10.4.27-MariaDB
--- Version de PHP : 8.0.25
+-- Version de PHP : 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -115,16 +115,17 @@ CREATE TABLE `ouvrage` (
   `TYPE_OUVRAGE` varchar(25) DEFAULT NULL,
   `DATE_EDITION` date DEFAULT NULL,
   `DATE_ACHAT` date DEFAULT NULL,
-  `NOMBRE_PAGE` int(11) DEFAULT NULL
+  `NOMBRE_PAGE` int(11) DEFAULT NULL,
+  `RESERVATION` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `ouvrage`
 --
 
-INSERT INTO `ouvrage` (`CODE_OUVRAGE`, `TITRE_OUVRAGE`, `NOM_AUTHEUR`, `IMG_OUVRAGE`, `ETAT_OUVRAGE`, `TYPE_OUVRAGE`, `DATE_EDITION`, `DATE_ACHAT`, `NOMBRE_PAGE`) VALUES
-(1, 'Je me battrai pour toi ', 'Sarah S. Cope', './images/ouvrage1.jpg', 'Neuf', 'roman', '2022-12-05', '2023-02-01', 210),
-(7, 'Le Medium (Suspense et Sentiments)', ' Julia Salvador ', './images/51TzZINJb8L._SY346_.jpg', 'Neuf', 'roman', '2020-09-14', '2023-03-10', 500);
+INSERT INTO `ouvrage` (`CODE_OUVRAGE`, `TITRE_OUVRAGE`, `NOM_AUTHEUR`, `IMG_OUVRAGE`, `ETAT_OUVRAGE`, `TYPE_OUVRAGE`, `DATE_EDITION`, `DATE_ACHAT`, `NOMBRE_PAGE`, `RESERVATION`) VALUES
+(1, 'Je me battrai pour toi ', 'Sarah S. Cope', '../images/ouvrage1.jpg', 'Neuf', 'roman', '2022-12-05', '2023-02-01', 210, 'non'),
+(7, 'Le Medium (Suspense et Sentiments)', ' Julia Salvador ', '../images/51TzZINJb8L._SY346_.jpg', 'Neuf', 'livre', '2020-09-14', '2023-03-10', 500, 'non');
 
 -- --------------------------------------------------------
 
