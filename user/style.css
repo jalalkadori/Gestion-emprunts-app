@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap');
-
 .blue {
     background-color: #2F58CD;
     color: white;
@@ -12,6 +11,9 @@
 }
 .bg-blue{
     background-color: #2F58CD;
+}
+.colorBlue{
+    color: #2F58CD;
 }
 .input-blue {
     font-family: 'Open Sans', sans-serif;

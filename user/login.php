@@ -44,13 +44,11 @@
             if($count == 0) {
                 $error_email = 'Adresse email ou mot de pass incorect';
             } else {
-                echo $admin_connection_results['EMAIL_BIBLIOTHECAIRE'];
-                echo $admin_connection_results['MDP_BIBLIOTHECAIRE'];
 
                 session_start();
                 $_SESSION['email'] = $adherent_connection_results['EMAIL_ADHERENT'];
-                $_SESSION['password'] = $adherent_connection_results['MDP_BIBLIOTHECAIRE'];
-                $_SESSION['id'] = $adherent_connection_results['ID_ADHERENT'];
+                $_SESSION['password'] = $adherent_connection_results['MDP_ADHERENT'];
+                $_SESSION['id_adherent'] = $adherent_connection_results['ID_ADHERENT'];
                 $_SESSION['full_name'] = $adherent_connection_results['NOM_ADHERENT'] . ' ' . $adherent_connection_results['PRENOM_ADHERENT'];
                 header('Location: index.php');
             }
