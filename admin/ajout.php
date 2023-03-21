@@ -53,7 +53,7 @@ if(!isset($_SESSION['email'])) {
             </div>
             <div class="d-flex flex-row justify-content-start align-items-center mb-4">
               <i class="fa-solid fa-check fs-3 text-light"></i>
-              <a class="btn text-light fs-5 font-weight-bold" name="validation">Enregistrement des emprunts</a>
+              <a class="btn text-light fs-5 font-weight-bold" href="./reservation.php">Enregistrement des emprunts</a>
             </div>
             <div class="d-flex flex-row justify-content-start align-items-center mb-4">
               <i class="fa-solid fa-bars-staggered fs-3 text-light"></i>

@@ -54,7 +54,7 @@ include("./session_config.php");
                   $type_ouvrage = $_POST["type_ouvrage"];
 
                   if(!empty($titre)) {
-                      $list_ouvrage_request.=" AND ouvrage.TITRE_OUVRAGE LIKE '$titre'";
+                      $list_ouvrage_request.=" AND ouvrage.TITRE_OUVRAGE = '$titre'";
                   } 
                   if(!empty($auteur)) {
                       $list_ouvrage_request.=" AND ouvrage.NOM_AUTHEUR = '$auteur'";

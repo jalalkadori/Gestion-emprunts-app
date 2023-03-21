@@ -13,7 +13,7 @@ if(!isset($_SESSION['email'])) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LGM | accueil</title>
+    <title>LGM | reservation</title>
     <link rel="stylesheet" href="./style.css">
     <script src="https://kit.fontawesome.com/75c6b1327b.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -22,7 +22,7 @@ if(!isset($_SESSION['email'])) {
    
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="./logo/LGM.png" alt="Logo" style="width:120px;"></a>
+            <a class="navbar-brand" href="index.php"><img src="./logo/LGM.png" alt="Logo" style="width:120px;"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -54,11 +54,11 @@ if(!isset($_SESSION['email'])) {
             </div>
             <div class="d-flex flex-row justify-content-start align-items-center mb-4">
               <i class="fa-solid fa-check fs-3 text-light"></i>
-              <a class="btn text-light fs-5 font-weight-bold" name="validation">Enregistrement des emprunts</a>
+              <a class="btn text-light fs-5 font-weight-bold" href="./reservation.php">Enregistrement des emprunts</a>
             </div>
             <div class="d-flex flex-row justify-content-start align-items-center mb-4">
               <i class="fa-solid fa-bars-staggered fs-3 text-light"></i>
-              <a class="btn text-light fs-5 font-weight-bold text-uppercase" name="list">list des ouvrages</a>
+              <a class="btn text-light fs-5 font-weight-bold" href="list.php ">list des ouvrages</a>
             </div>
           </div>
             <?php
@@ -83,7 +83,7 @@ if(!isset($_SESSION['email'])) {
                             <div class='card-header text-center bg-primary text-light'>reservation n° : ".$row['ID_RESERVATION']."</div>
                                 <div class='card-body d-flex flex-column justify-content-end'>
                                     <p class='card-title'>CODE d'ouvrage : ".$row['CODE_OUVRAGE']."</p>
-                                    <p class='card-title'>code d'agherent : ".$row['CODE_OUVRAGE']."</p>
+                                    <p class='card-title'>code d'adherent : ".$row['CODE_OUVRAGE']."</p>
                                     <p class='card-title'>effectuée le : ".date("d-m-Y", strtotime($row['DATE_RESERVATION']))."</p>
                                     <a href='#' class='col btn btn-primary cess'>enregistrer</a>
                                 </div>
