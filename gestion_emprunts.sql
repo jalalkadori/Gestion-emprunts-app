@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 10 mars 2023 à 00:54
+-- Généré le : lun. 20 mars 2023 à 08:19
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -47,7 +47,7 @@ CREATE TABLE `adherent` (
 --
 
 INSERT INTO `adherent` (`ID_ADHERENT`, `NOM_ADHERENT`, `PRENOM_ADHERENT`, `CIN_ADHERENT`, `ADRESSE_ADHERENT`, `DN_ADHERENT`, `TELE_ADHERENT`, `EMAIL_ADHERENT`, `MDP_ADHERENT`, `TYPE_ADHERENT`, `DATE_CREATION_COMPTE`, `PENALITE`) VALUES
-(2, 'KADDOURI', 'Jalal', 'CD000000', 'RTE RABAT Tanger', '2000-03-22', 601020304, 'jalalkaddouri@gmail.com', '1234567890', 'Étudiants', '2023-03-09 11:16:16', 0);
+(2, 'KADDOURI', 'Jalal', 'CD291849', 'RTE RABAT Tanger', '2000-03-22', 601020304, 'jalalkaddouri@gmail.com', '1234567890', 'Étudiants', '2023-03-17 20:47:56', 0);
 
 -- --------------------------------------------------------
 
@@ -81,6 +81,7 @@ CREATE TABLE `emprunt` (
   `ID_BIBLIOTHECAIRE` int(11) NOT NULL,
   `ID_ADHERENT` int(11) NOT NULL,
   `ID_RESERVATION` int(11) NOT NULL,
+  `CODE_OUVRAGE` int(11) NOT NULL,
   `DATE_EMPRUNT` date DEFAULT NULL,
   `DATE_RETOUR` date DEFAULT NULL,
   `DATE_EFF_RETOUT` date DEFAULT NULL
@@ -137,8 +138,15 @@ CREATE TABLE `reservation` (
   `ID_RESERVATION` int(11) NOT NULL,
   `ID_ADHERENT` int(11) NOT NULL,
   `CODE_OUVRAGE` int(11) NOT NULL,
-  `DATE_RESERVATION` date DEFAULT NULL
+  `DATE_RESERVATION` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `reservation`
+--
+
+INSERT INTO `reservation` (`ID_RESERVATION`, `ID_ADHERENT`, `CODE_OUVRAGE`, `DATE_RESERVATION`) VALUES
+(4, 2, 1, '2023-03-19 19:19:32');
 
 --
 -- Index pour les tables déchargées
@@ -161,7 +169,6 @@ ALTER TABLE `bibliothecaire`
 --
 ALTER TABLE `emprunt`
   ADD PRIMARY KEY (`ID_EMPRUNT`),
-  ADD KEY `AK_PK_ID_EMPRUNT` (`ID_EMPRUNT`),
   ADD KEY `ID_RESERVATION` (`ID_RESERVATION`),
   ADD KEY `ID_ADHERENT` (`ID_ADHERENT`),
   ADD KEY `ID_BIBLIOTHECAIRE` (`ID_BIBLIOTHECAIRE`);
@@ -226,7 +233,7 @@ ALTER TABLE `ouvrage`
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `ID_RESERVATION` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_RESERVATION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Contraintes pour les tables déchargées
@@ -253,6 +260,14 @@ ALTER TABLE `operation`
 ALTER TABLE `reservation`
   ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`ID_ADHERENT`) REFERENCES `adherent` (`ID_ADHERENT`),
   ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`CODE_OUVRAGE`) REFERENCES `ouvrage` (`CODE_OUVRAGE`);
+
+DELIMITER $$
+--
+-- Évènements
+--
+CREATE DEFINER=`root`@`localhost` EVENT `Annulation_reservation` ON SCHEDULE EVERY 1 MINUTE STARTS '2023-03-01 22:09:29' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM reservation WHERE reservation.DATE_RESERVATION < DATE_SUB(NOW(), INTERVAL 24 HOUR)$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
