@@ -58,67 +58,35 @@ if(!isset($_SESSION['email'])) {
             </div>
             <div class="d-flex flex-row justify-content-start align-items-center mb-4">
               <i class="fa-solid fa-bars-staggered fs-3 text-light"></i>
-              <a class="btn text-light fs-5 font-weight-bold" name="list">List des ouvrages</a>
+              <a class="btn text-light fs-5 font-weight-bold text-uppercase" name="list">list des ouvrages</a>
             </div>
           </div>
             <?php
-                $list_ouvrage_request = "SELECT * FROM `ouvrage`";
-                $list_ouvrage = $db_connection->prepare($list_ouvrage_request);
-                $list_ouvrage->execute();
+                $reservation_list_request = "SELECT * FROM `reservation`";
+                $reservation_list = $db_connection->prepare($reservation_list_request);
+                $reservation_list->execute();
 
             
             ?>
 
 
           <div class="col-9">
-                <section class="container pt-5">  
-                  <form class="row row-cols-1 row-cols-lg-4"  action="" method="POST">
-                      <div class="col">
-                          <h5 for="type">titre de l’ouvrage</h5>
-                          <input type="text" class="w-100 input-blue" name="titre">
-                      </div>
-                      <div class="col">
-                          <h5 for="type">Nom d’auteur</h5>
-                          <input type="text" class="w-100 input-blue" name="auteur">
-                      </div>
-                      <div class="col">
-                          <h5 for="type">Type de l’ouvrage</h5>
-                          <select class="w-100 input-blue" name="type_ouvrage">
-                                <option></option>
-                                <option value="livre">livre</option>
-                                <option value="roman">roman</option>
-                                <option value="DVD">DVD</option>
-                                <option value="mémoire de recherche">mémoire de recherche</option>
-                          </select>
-                      </div>
-                      
-                      <div class="col d-flex align-items-end mt-2">
-                          <h5 for="type"></h5>
-                          <button Class="w-100 blue" name="chercher">Chercher</button>
-                      </div>
-                  </form>
-                </section>
 
-            <div class="container text-center text-uppercase">
-              <h1 class="text-center mb-5 text-uppercase" style="color: #2F58CD">list des ouvrages</h1>
-              <div class="row row-cols-4">
+            <div class="container text-uppercase">
+              <h1 class="text-center mb-5 text-uppercase" style="color: #2F58CD">reservations en cours</h1>
+              <div class="row row-cols-4 text-uppercase">
                 <?php
-                while($row = $list_ouvrage->fetch(PDO::FETCH_ASSOC)) {
+                while($row = $reservation_list->fetch(PDO::FETCH_ASSOC)) {
                     echo "
                         <div class='col'>
-                            <div class='card position-relative' style='width: 15rem; height:400px;'>
-                                <img src='".$row['IMG_OUVRAGE']."' class='card-img-top img-thumbnail' style='height:200px;'>
+                            <div class='card' style='width: 15rem;'>
+                            <div class='card-header text-center bg-primary text-light'>reservation n° : ".$row['ID_RESERVATION']."</div>
                                 <div class='card-body d-flex flex-column justify-content-end'>
-                                    <h5 class='card-title'>".$row['TITRE_OUVRAGE']."</h5>
-                                    <p class='card-text'>Par : ".$row['NOM_AUTHEUR']."</p>
-                                    <div class='row gap-1'>
-                                      <a href='#' class='col btn btn-success'>Modifer</a>
-                                      <a href='#' class='col btn btn-danger'>Supprimer</a>
-                                    </div>
+                                    <p class='card-title'>CODE d'ouvrage : ".$row['CODE_OUVRAGE']."</p>
+                                    <p class='card-title'>code d'agherent : ".$row['CODE_OUVRAGE']."</p>
+                                    <p class='card-title'>effectuée le : ".date("d-m-Y", strtotime($row['DATE_RESERVATION']))."</p>
+                                    <a href='#' class='col btn btn-primary cess'>enregistrer</a>
                                 </div>
-                                <span class='position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle'>
-                                    <span class='visually-hidden'>New alerts</span>
-                                </span>
                             </div>
                         </div>
                     ";
