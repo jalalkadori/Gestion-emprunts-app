@@ -126,7 +126,7 @@ $adherent_id = $_SESSION['id_adherent'];
                         ?>
                     </tbody>
                 </table>
-                <h6 class="text-danger fw-lighter text-lowercase">* Les réservations annulées seront supprimées automatiquement après 24 h. </h6>   
+                <h6 class="text-danger fw-lighter text-lowercase">* Les réservations non validées seront supprimées automatiquement après 24 h. </h6>   
             </section>
             <section class="container-fluid text-uppercase my-5">
                 <div class="border-bottom border-3">

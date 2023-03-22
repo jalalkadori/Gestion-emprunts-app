@@ -22,7 +22,7 @@ if(!isset($_SESSION['email'])) {
    
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="./logo/LGM.png" alt="Logo" style="width:120px;"></a>
+            <a class="navbar-brand" href="index.php"><img src="./logo/LGM.png" alt="Logo" style="width:120px;"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -62,16 +62,31 @@ if(!isset($_SESSION['email'])) {
             </div>
           </div>
             <?php
-                $list_ouvrage_request = "SELECT * FROM `ouvrage`";
-                $list_ouvrage = $db_connection->prepare($list_ouvrage_request);
-                $list_ouvrage->execute();
+                 $list_ouvrage_request = "SELECT * FROM `ouvrage` WHERE ouvrage.RESERVATION = 'non'";
 
+                if(isset($_POST['chercher'])) {
+                  $titre = $_POST["titre"];
+                  $auteur = $_POST["auteur"];
+                  $type_ouvrage = $_POST["type_ouvrage"];
+
+                  if(!empty($titre)) {
+                      $list_ouvrage_request.=" AND ouvrage.TITRE_OUVRAGE = '$titre'";
+                  } 
+                  if(!empty($auteur)) {
+                      $list_ouvrage_request.=" AND ouvrage.NOM_AUTHEUR = '$auteur'";
+                  }
+                  if(!empty($type_ouvrage)) {
+                      $list_ouvrage_request.=" AND ouvrage.TYPE_OUVRAGE = '$type_ouvrage'";
+                  }
+               
+                } 
             
             ?>
 
 
           <div class="col-9">
-                <section class="container pt-5">  
+                <section class="container">
+                <h3 class="">Filtrer la liste des ouvrage !</h2>  
                   <form class="row row-cols-1 row-cols-lg-4"  action="" method="POST">
                       <div class="col">
                           <h5 for="type">titre de l’ouvrage</h5>
@@ -100,9 +115,12 @@ if(!isset($_SESSION['email'])) {
                 </section>
 
             <div class="container text-center text-uppercase">
-              <h1 class="text-center mb-5 text-uppercase" style="color: #2F58CD">list des ouvrages</h1>
+            <h3 class="text-center my-5 text-uppercase">list des ouvrages</h1>
               <div class="row row-cols-4">
                 <?php
+
+                $list_ouvrage = $db_connection->prepare($list_ouvrage_request);
+                $list_ouvrage->execute();
                 while($row = $list_ouvrage->fetch(PDO::FETCH_ASSOC)) {
                     echo "
                         <div class='col'>
